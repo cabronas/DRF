@@ -6,3 +6,5 @@ class Product(models.Model):
     price = models.DecimalField(decimal_places=2)
     count = models.IntegerField()
     comment = models.CharField(max_length=50)
+
+

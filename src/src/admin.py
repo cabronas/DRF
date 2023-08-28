@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from REST.models import Product
+from src.models import Product
 
 admin.site.register(Product)
