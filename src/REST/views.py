@@ -101,6 +101,6 @@ class ProductS(ModelViewSet):
     serializer_class = ProductSerializer
 
 
-class ProductSDetail(ModelViewSet):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+# class ProductSDetail(ModelViewSet):
+#     queryset = Product.objects.all()
+#     serializer_class = ProductSerializer
