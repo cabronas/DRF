@@ -1,11 +1,15 @@
+# from asyncio import mixins
+
 from django.db.migrations import serializer
 from django.http import JsonResponse
 from django.shortcuts import render
+from rest_framework import mixins
 from rest_framework.decorators import api_view
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ModelViewSet, GenericViewSet
 
 from REST.models import Product
 from REST.serializers import ProductSerializer
@@ -96,10 +100,16 @@ class ProductsJRDetail(RetrieveUpdateDestroyAPIView):
     serializer_class = ProductSerializer
 
 
-class ProductS(ModelViewSet):
+class ProductS(mixins.CreateModelMixin,
+               mixins.RetrieveModelMixin,
+               mixins.UpdateModelMixin,
+               mixins.DestroyModelMixin,
+               mixins.ListModelMixin,
+               GenericViewSet):
+    # permission_classes = (IsAuthenticated,)
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-
+    permission_classes = (IsAuthenticated,)
 
 # class ProductSDetail(ModelViewSet):
 #     queryset = Product.objects.all()
